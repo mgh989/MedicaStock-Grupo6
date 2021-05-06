@@ -1,10 +1,12 @@
 package pe.edu.upc.daoimpl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import pe.edu.upc.dao.IUsuarioDao;
@@ -20,22 +22,15 @@ public class UsuarioDaoImpl implements Serializable, IUsuarioDao {
 	@Transactional
 	@Override
 	public void insert(Usuario Usuario) {
-		// TODO Auto-generated method stub
-		
+		em.persist(Usuario);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Usuario> list() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Usuario> lista=new ArrayList<Usuario>();
+		Query q = em.createQuery("from Usuario u");
+		lista = (List<Usuario>) q.getResultList();
+		return lista;
 	}
-
-	@Override
-	public void eliminar(int idUsuario) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
-
 }
